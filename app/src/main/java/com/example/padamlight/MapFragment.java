@@ -1,14 +1,19 @@
 package com.example.padamlight;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.padamlight.jsonparser.DataParser;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,12 +23,27 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Map Fragment
  * Responsible of displaying map and interactions with it
  */
 public class MapFragment extends Fragment implements OnMapReadyCallback, MapActionsDelegate {
+    private Polyline currentPolyline;
 
     @Nullable
     private GoogleMap mMap;
@@ -65,6 +85,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapActi
             }
             LatLngBounds bounds = builder.build();
             animateMapCamera(bounds);
+            //FetchURL fetchURL = new FetchURL(mMap,getContext());
+            //fetchURL.execute(getUrl(latLngs[0], latLngs[1], "driving"), "driving");
         }
     }
 
@@ -80,6 +102,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapActi
         }
     }
 
+    public void onTaskDone(Object... values) {
+        if (currentPolyline != null)
+            currentPolyline.remove();
+        currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+    }
     @Override
     public void clearMap() {
         if (mMap != null) {
@@ -108,9 +135,30 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapActi
         }
         return BitmapDescriptorFactory.fromResource(icon);
     }
+    /*
+
+    * */
+    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
+        return url;
+    }
 
 }
-
+/**
+ *
+ *
+ */
 
 /**
  * Map interface

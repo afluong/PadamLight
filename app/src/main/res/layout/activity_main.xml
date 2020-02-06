@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".SearchFragment">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/fragment_map"
@@ -35,7 +35,7 @@
             android:layout_marginTop="20sp"
             android:layout_marginRight="10sp"
             android:background="@drawable/spinner_padam"
-            android:elevation="8sp"
+            android:elevation="4sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +47,8 @@
             android:layout_marginLeft="10sp"
             android:layout_marginTop="10sp"
             android:layout_marginRight="10sp"
+            android:background="@drawable/spinner_padam"
+            android:elevation="4sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinner_from" />
@@ -60,6 +62,7 @@
             android:layout_marginRight="10sp"
             android:layout_marginBottom="10sp"
             android:background="@color/colorPrimary"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

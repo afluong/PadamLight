@@ -3,4 +3,12 @@
     <string name="hint_from">D\'où venez-vous</string>
     <string name="hint_to">Où allez-vous ?</string>
     <string name="button_search">rechercher</string>
+    <string name="menu_map">Itinéraire</string>
+    <string name="menu_profile">Mon Profil</string>
+    <string name="padam_mobility">Padam Mobility</string>
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
