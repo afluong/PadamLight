@@ -6,4 +6,8 @@
   <string name="back">Back</string>
   <string name="var_continue">continue</string>
   <string name="itinerary_dialog">Do You want to open this %1$s long itinerary on map</string>
+  <string name="padam_map">Padam map</string>
+  <string name="cyril_resume">Cyril resume</string>
+  <string name="open_drawer">open</string>
+  <string name="close_drawer">close</string>
 </resources>

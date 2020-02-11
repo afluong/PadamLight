@@ -1,10 +1,16 @@
 package com.example.padamlight.views.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.padamlight.R
 import com.example.padamlight.enums.MarkerType
 import com.example.padamlight.interfaces.MapActionsDelegate
@@ -12,13 +18,18 @@ import com.example.padamlight.models.Suggestion
 import com.example.padamlight.utils.Tools
 import com.example.padamlight.views.fragments.MapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class SearchActivity : AppCompatActivity() {
+
+class SearchActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 	private lateinit var mSpinnerFrom: Spinner
 	private lateinit var mSpinnerTo: Spinner
 	private lateinit var mButtonSearch: Button
+	private lateinit var mDrawerLayout: DrawerLayout
+	private lateinit var navigationView: NavigationView
+	private lateinit var drawerToggle: ActionBarDrawerToggle
 
 	private lateinit var mapDelegate: MapActionsDelegate
 	private lateinit var mFromList: HashMap<String, Suggestion>
@@ -37,15 +48,30 @@ class SearchActivity : AppCompatActivity() {
 
 		initMap()
 		bindViews()
+		initDrawer()
 		bindClicks()
 		initializeTextViews()
 		initSpinners()
+	}
+
+	private fun initDrawer() {
+		drawerToggle = ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_drawer, R.string.close_drawer)
+
+		mDrawerLayout.addDrawerListener(drawerToggle)
+		drawerToggle.syncState()
+
+		supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+		navigationView.setNavigationItemSelectedListener(this)
+
 	}
 
 	private fun bindViews() {
 		mSpinnerFrom = spinner_from
 		mSpinnerTo = spinner_to
 		mButtonSearch = button_search
+		mDrawerLayout = drawer_layout
+		navigationView = nav_view
 	}
 
 	private fun bindClicks() {
@@ -95,4 +121,27 @@ class SearchActivity : AppCompatActivity() {
 		mFromList["Free2Move"] = Suggestion(FREE2MOVE)
 		return mFromList
 	}
+
+	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+		return if (drawerToggle.onOptionsItemSelected(item)) true else super.onOptionsItemSelected(item)
+	}
+
+	override fun onNavigationItemSelected(item: MenuItem): Boolean {
+		val activity = item.itemId
+
+		when (activity) {
+			R.id.search_map ->
+				if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+					mDrawerLayout.closeDrawer(Gravity.LEFT)
+				}
+			R.id.resume -> {
+				val intent = Intent(this, PropositionsActivity::class.java)
+				startActivity(intent)
+			}
+			else -> return true
+		}
+		return true
+	}
+
+
 }
