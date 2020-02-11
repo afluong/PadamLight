@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">PadamLight</string>
-    <string name="hint_from">D\'où venez-vous</string>
-    <string name="hint_to">Où allez-vous ?</string>
-    <string name="button_search">rechercher</string>
+  <string name="app_name">PadamLight</string>
+  <string name="hint_from">D\'où venez-vous</string>
+  <string name="hint_to">Où allez-vous ?</string>
+  <string name="button_search">rechercher</string>
+  <string name="back">Back</string>
+  <string name="var_continue">continue</string>
+  <string name="itinerary_dialog">Do You want to open this %1$s long itinerary on map</string>
 </resources>
