@@ -3,4 +3,22 @@
     <string name="hint_from">D\'où venez-vous</string>
     <string name="hint_to">Où allez-vous ?</string>
     <string name="button_search">rechercher</string>
+    <string name="message_duration">Votre trajet va durer </string>
+
+    <string name="menu_map">Itinéraire</string>
+    <string name="menu_profile">Profile</string>
+
+    <string name="profile_firstname">Prénom</string>
+    <string name="profile_lastname">Nom</string>
+    <string name="profile_mail">Email</string>
+    <string name="profile_phone">Téléphone</string>
+    <string name="profile_address">Adresse</string>
+    <string name="profile_description">Description</string>
+    <string name="profile_motivation">Motivation</string>
+
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
