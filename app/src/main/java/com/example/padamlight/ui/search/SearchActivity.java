@@ -1,4 +1,4 @@
-package com.example.padamlight;
+package com.example.padamlight.ui.search;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+
+import com.example.padamlight.enums.MarkerType;
+import com.example.padamlight.ui.map.fragment.MapFragment;
+
+import com.example.padamlight.R;
+import com.example.padamlight.models.Suggestion;
+import com.example.padamlight.ui.map.interfaces.MapActionsDelegate;
 import com.example.padamlight.utils.Toolbox;
 import com.google.android.gms.maps.model.LatLng;
 

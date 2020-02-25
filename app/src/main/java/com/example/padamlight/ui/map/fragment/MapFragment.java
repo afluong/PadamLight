@@ -1,7 +1,8 @@
-package com.example.padamlight;
+package com.example.padamlight.ui.map.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.padamlight.R;
+
+import com.example.padamlight.enums.MarkerType;
+import com.example.padamlight.ui.base.BaseFragment;
+import com.example.padamlight.ui.map.interfaces.MapActionsDelegate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -19,34 +25,43 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import butterknife.Bind;
+
 /**
  * Map Fragment
  * Responsible of displaying map and interactions with it
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback, MapActionsDelegate {
+public class MapFragment extends BaseFragment implements OnMapReadyCallback, MapActionsDelegate {
+
 
     @Nullable
     private GoogleMap mMap;
 
-    public static MapFragment newInstance() {
-        return new MapFragment();
-    }
+    public MapFragment() {
+        super(R.layout.fragment_map);
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_map, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void initUi() {
         // Instanciate map fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_fragment);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+
     }
+
+
+    public static MapFragment newInstance() {
+        return new MapFragment();
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -112,22 +127,3 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapActi
 }
 
 
-/**
- * Map interface
- * Implement this in your page where there is a map to use map methods
- */
-interface MapActionsDelegate {
-    void updateMap(LatLng... latLngs);
-
-    void updateMarker(MarkerType type, String markerName, LatLng markerLatLng);
-
-    void clearMap();
-}
-
-/**
- * Market enum
- * Define if marker is pickup type or dropoff type
- */
-enum MarkerType {
-    PICKUP, DROPOFF;
-}

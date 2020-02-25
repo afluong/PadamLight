@@ -1,7 +1,8 @@
-package com.example.padamlight;
+package com.example.padamlight.models;
 
 import android.support.annotation.DrawableRes;
 
+import com.example.padamlight.R;
 import com.google.android.gms.maps.model.LatLng;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.padamlight;
+package com.example.padamlight.ui.propositions;
 
 import android.support.v7.app.AppCompatActivity;
 

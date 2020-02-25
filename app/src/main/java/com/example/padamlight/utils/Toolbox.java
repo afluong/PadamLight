@@ -1,6 +1,6 @@
 package com.example.padamlight.utils;
 
-import com.example.padamlight.Suggestion;
+import com.example.padamlight.models.Suggestion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
