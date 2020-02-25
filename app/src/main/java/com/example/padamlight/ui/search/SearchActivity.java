@@ -33,7 +33,7 @@ public class SearchActivity extends AppCompatActivity {
     Button mButtonSearch;
 
     private MapActionsDelegate mapDelegate;
-    private HashMap<String, Suggestion> mFromList;
+    private HashMap<String, Suggestion> mSuggestionsList;
 
     /*
         Constants FROM lat lng
@@ -80,32 +80,31 @@ public class SearchActivity extends AppCompatActivity {
     /**
      * Initialize spinners from and to
      */
-    // TODO : Initialize the "To" spinner with data of your choice
     private void initSpinners() {
         List<String> fromList = Toolbox.formatHashmapToList(initFromHashmap());
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fromList);
         mSpinnerFrom.setAdapter(adapter);
+        mSpinnerTo.setAdapter(adapter);
     }
 
     /**
      * Using Hashmap to initialize FROM suggestion list
      */
     private HashMap<String, Suggestion> initFromHashmap() {
-        mFromList = new HashMap<>();
-        mFromList.put("Padam", new Suggestion(PADAM));
-        mFromList.put("Tao Résa'Est", new Suggestion(TAO));
-        mFromList.put("Flexigo", new Suggestion(FLEXIGO));
-        mFromList.put("La Navette", new Suggestion(LA_NAVETTE));
-        mFromList.put("Ilévia", new Suggestion(ILEVIA));
-        mFromList.put("Night Bus", new Suggestion(NIGHT_BUS));
-        mFromList.put("Free2Move", new Suggestion(FREE2MOVE));
-        return mFromList;
+        mSuggestionsList = new HashMap<>();
+        mSuggestionsList.put("Padam", new Suggestion(PADAM));
+        mSuggestionsList.put("Tao Résa'Est", new Suggestion(TAO));
+        mSuggestionsList.put("Flexigo", new Suggestion(FLEXIGO));
+        mSuggestionsList.put("La Navette", new Suggestion(LA_NAVETTE));
+        mSuggestionsList.put("Ilévia", new Suggestion(ILEVIA));
+        mSuggestionsList.put("Night Bus", new Suggestion(NIGHT_BUS));
+        mSuggestionsList.put("Free2Move", new Suggestion(FREE2MOVE));
+        return mSuggestionsList;
     }
 
     /**
      * Define what to do after the button click interaction
      */
-    //TODO : Implement the same thing for "To" spinner
     @OnClick(R.id.button_search)
     void onClickSearch() {
 
@@ -113,12 +112,18 @@ public class SearchActivity extends AppCompatActivity {
             Retrieve selection of "From" spinner
          */
         String selectedFrom = String.valueOf(mSpinnerFrom.getSelectedItem());
-        if (selectedFrom != null || !selectedFrom.isEmpty()) {
-            mapDelegate.clearMap();
-            Suggestion selectedFromSuggestion = mFromList.get(selectedFrom);
+        String selectedTo = String.valueOf(mSpinnerTo.getSelectedItem());
+        mapDelegate.clearMap();
+        Suggestion selectedFromSuggestion = mSuggestionsList.get(selectedFrom);
+        Suggestion selectedToSuggestion = mSuggestionsList.get(selectedTo);
+        if (selectedFromSuggestion != null && selectedToSuggestion != null) {
             mapDelegate.updateMarker(MarkerType.PICKUP, selectedFrom, selectedFromSuggestion.getLatLng());
-            mapDelegate.updateMap(selectedFromSuggestion.getLatLng());
+            mapDelegate.updateMarker(MarkerType.DROPOFF, selectedTo, selectedToSuggestion.getLatLng());
+            mapDelegate.updateMap(selectedFromSuggestion.getLatLng(), selectedToSuggestion.getLatLng());
         }
+
+
+
     }
 }
 
