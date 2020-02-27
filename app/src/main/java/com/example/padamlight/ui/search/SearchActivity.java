@@ -7,11 +7,12 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 
+
 import com.example.padamlight.enums.MarkerType;
 import com.example.padamlight.ui.map.fragment.MapFragment;
 
 import com.example.padamlight.R;
-import com.example.padamlight.models.Suggestion;
+import com.example.padamlight.data.local.Suggestion;
 import com.example.padamlight.ui.map.interfaces.MapActionsDelegate;
 import com.example.padamlight.utils.Toolbox;
 import com.google.android.gms.maps.model.LatLng;
@@ -120,11 +121,14 @@ public class SearchActivity extends AppCompatActivity {
             mapDelegate.updateMarker(MarkerType.PICKUP, selectedFrom, selectedFromSuggestion.getLatLng());
             mapDelegate.updateMarker(MarkerType.DROPOFF, selectedTo, selectedToSuggestion.getLatLng());
             mapDelegate.updateMap(selectedFromSuggestion.getLatLng(), selectedToSuggestion.getLatLng());
+
+            mapDelegate.drawRoute(selectedFromSuggestion, selectedToSuggestion);
         }
 
 
-
     }
+
+
 }
 
 

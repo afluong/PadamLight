@@ -1,4 +1,4 @@
-package com.example.padamlight.models;
+package com.example.padamlight.data.local;
 
 import android.support.annotation.DrawableRes;
 
@@ -27,5 +27,9 @@ public class Suggestion {
     @DrawableRes
     public int getIcon() {
         return icon;
+    }
+
+    public String toString(){
+        return latLng.latitude + "," + latLng.longitude;
     }
 }
