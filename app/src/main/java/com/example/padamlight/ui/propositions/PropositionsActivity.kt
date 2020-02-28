@@ -43,6 +43,7 @@ class PropositionsActivity : AppCompatActivity(), NavigationView.OnNavigationIte
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.title = getString(R.string.cv_title)
 
 
         navigationView.setNavigationItemSelectedListener(this)

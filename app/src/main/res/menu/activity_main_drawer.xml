@@ -3,10 +3,10 @@
     <group>
         <item android:id="@+id/nav_item_map"
             android:icon="@drawable/ic_map"
-            android:title="Map" />
+            android:title="@string/map_title" />
         <item android:id="@+id/nav_item_resume"
             android:icon="@drawable/ic_resume"
-           android:title="CV" />
+           android:title="@string/cv_title" />
     </group>
 
 </menu>

@@ -8,4 +8,6 @@
     <string name="CV">CV_Metaut_Benjamin.pdf</string>
     <string name="no_road">Pas de chemin ! :(</string>
     <string name="already_here">Tu est déja la :)</string>
+    <string name="map_title">Map</string>
+    <string name="cv_title">CV</string>
 </resources>
