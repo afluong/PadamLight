@@ -6,4 +6,6 @@
     <string name="navigation_drawer_open">Ouvert</string>
     <string name="navigation_drawer_close">Fermer</string>
     <string name="CV">CV_Metaut_Benjamin.pdf</string>
+    <string name="no_road">Pas de chemin ! :(</string>
+    <string name="already_here">Tu est déja la :)</string>
 </resources>
