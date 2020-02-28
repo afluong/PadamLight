@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:id="@+id/nav_item_map"
+            android:icon="@drawable/ic_map"
+            android:title="Map" />
+        <item android:id="@+id/nav_item_resume"
+            android:icon="@drawable/ic_resume"
+           android:title="CV" />
+    </group>
+
+</menu>

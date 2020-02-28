@@ -3,4 +3,7 @@
     <string name="hint_from">D\'où venez-vous</string>
     <string name="hint_to">Où allez-vous ?</string>
     <string name="button_search">rechercher</string>
+    <string name="navigation_drawer_open">Ouvert</string>
+    <string name="navigation_drawer_close">Fermer</string>
+    <string name="CV">CV_Metaut_Benjamin.pdf</string>
 </resources>

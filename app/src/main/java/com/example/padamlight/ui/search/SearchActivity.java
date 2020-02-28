@@ -1,11 +1,22 @@
 package com.example.padamlight.ui.search;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-
+import android.widget.Toast;
 
 
 import com.example.padamlight.enums.MarkerType;
@@ -14,6 +25,7 @@ import com.example.padamlight.ui.map.fragment.MapFragment;
 import com.example.padamlight.R;
 import com.example.padamlight.data.local.Suggestion;
 import com.example.padamlight.ui.map.interfaces.MapActionsDelegate;
+import com.example.padamlight.ui.propositions.PropositionsActivity;
 import com.example.padamlight.utils.Toolbox;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -24,7 +36,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Bind(R.id.spinner_from)
     Spinner mSpinnerFrom;
@@ -32,6 +44,17 @@ public class SearchActivity extends AppCompatActivity {
     Spinner mSpinnerTo;
     @Bind(R.id.button_search)
     Button mButtonSearch;
+
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @Bind(R.id.toolbar_main)
+    Toolbar toolbar;
+
+    @Bind(R.id.nav_view)
+    NavigationView navigationView;
+
+
+    private ActionBarDrawerToggle toggle;
 
     private MapActionsDelegate mapDelegate;
     private HashMap<String, Suggestion> mSuggestionsList;
@@ -55,9 +78,43 @@ public class SearchActivity extends AppCompatActivity {
         // Binding UI elements defined below
         ButterKnife.bind(this);
 
+        setSupportActionBar(toolbar);
+
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.syncState();
+
+        drawerLayout.addDrawerListener(toggle);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         initializeTextViews();
         initSpinners();
         initMap();
+    }
+
+    @Override
+    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState, persistentState);
+        toggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        toggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(toggle.onOptionsItemSelected(item)){
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 
     private void initializeTextViews() {
@@ -129,6 +186,21 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.nav_item_map:
+                Toast.makeText(this, "Tu est déja la :)", Toast.LENGTH_LONG).show();
+                drawerLayout.closeDrawer(Gravity.START);
+                break;
+            case R.id.nav_item_resume:
+                Intent intent = new Intent(this, PropositionsActivity.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(Gravity.START);
+                break;
+        }
+        return true;
+    }
 }
 
 
